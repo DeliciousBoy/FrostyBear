@@ -2,12 +2,11 @@
 
 namespace FrostyBear.Controllers
 {
-    public class AboutController : Controller
+    public class TestController : Controller
     {
         public string Index()
         {
-            //return View();
-            return "kkk";
+            return "test";
         }
     }
 }
