@@ -4,9 +4,9 @@ namespace FrostyBear.Controllers
 {
     public class IT : Controller
     {
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return "it test";
         }
     }
 }
