@@ -6,6 +6,7 @@ namespace FrostyBear.Controllers
     {
         public IActionResult Index()
         {
+            1 = 1;
             return View();
         }
     }
