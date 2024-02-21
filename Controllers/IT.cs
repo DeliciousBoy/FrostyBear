@@ -6,7 +6,7 @@ namespace FrostyBear.Controllers
     {
         public string Index()
         {
-            return "it test";
+            return "6430250440";
         }
     }
 }
