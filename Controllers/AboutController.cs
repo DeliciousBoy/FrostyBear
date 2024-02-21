@@ -7,7 +7,7 @@ namespace FrostyBear.Controllers
         public string Index()
         {
             //return View();
-            return "kkk";
+            return "RAWEE";
         }
     }
 }
