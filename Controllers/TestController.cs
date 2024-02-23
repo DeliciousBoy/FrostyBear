@@ -6,7 +6,7 @@ namespace FrostyBear.Controllers
     {
         public string Index()
         {
-            return "test back-end only gide3";
+            return "test back-end only gide32";
         }
     }
 }
