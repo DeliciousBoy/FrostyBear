@@ -1,7 +1,18 @@
+using FrostyBear.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+/*
+builder.Services.AddDbContext<FrostyBearContext>(option => option.UseSqlServer(
+    builder.Configuration.GetConnectionString("DBConn")
+    )
+);
+*/
+
 
 var app = builder.Build();
 

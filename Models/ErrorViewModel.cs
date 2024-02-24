@@ -1,4 +1,4 @@
-namespace FrostyBear.Models
+﻿namespace FrostyBear.Models
 {
     public class ErrorViewModel
     {
