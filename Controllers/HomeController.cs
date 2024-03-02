@@ -2,6 +2,7 @@ using FrostyBear.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+
 namespace FrostyBear.Controllers
 {
     public class HomeController : Controller
