@@ -45,9 +45,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="wwwroot\images\artic_vanilla.png" />
     <None Include="wwwroot\images\avalance_almond.png" />
     <None Include="wwwroot\images\Banana_cone.png" />
