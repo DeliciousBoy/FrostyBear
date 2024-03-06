@@ -47,7 +47,7 @@ public partial class FrostyBearContext : DbContext
     {
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E279D299EC4");
+            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E2747B711AB");
 
             entity.Property(e => e.BrandId).HasColumnName("brand_id");
             entity.Property(e => e.BrandName)
@@ -122,7 +122,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B4B07BD511");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B45EBF4B5C");
 
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
@@ -162,7 +162,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Delivery>(entity =>
         {
-            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F5BA2B20C7");
+            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F5FC292BD6");
 
             entity.Property(e => e.DeliveryId).HasColumnName("delivery_id");
             entity.Property(e => e.DeliveryDate)
@@ -273,7 +273,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<SalesDaily>(entity =>
         {
-            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF8DE36CD37");
+            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF8F0883AC7");
 
             entity.ToTable("Sales_Daily");
 
@@ -285,7 +285,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__85C600AFD66854BA");
+            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__85C600AFBC9C9435");
 
             entity.Property(e => e.TransactionId)
                 .ValueGeneratedNever()
