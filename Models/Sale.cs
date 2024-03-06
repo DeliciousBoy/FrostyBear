@@ -21,8 +21,6 @@ public partial class Sale
 
     public virtual ICollection<Delivery> Deliveries { get; set; } = new List<Delivery>();
 
-    public virtual Employee? Employee { get; set; }
-
     public virtual Product? Product { get; set; }
 
     public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
