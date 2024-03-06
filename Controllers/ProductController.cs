@@ -163,11 +163,11 @@ namespace FrostyBear.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(string Pdid)
+        public IActionResult DeletePost(string ProductId)
         {
             try
             {
-                var obj = _db.Products.Find(Pdid);
+                var obj = _db.Products.Find(ProductId);
                 if (obj == null)
                 {
                     ViewBag.ErrorMessage = "ไม่พบข้อมูล";
