@@ -11,9 +11,11 @@ public partial class CartDetail
 
     public int? ProductId { get; set; }
 
-    public string? Quantity { get; set; }
+    public double? Cdquantity { get; set; }
 
-    public int? Price { get; set; }
+    public double? Cdprice { get; set; }
+
+    public double? Cdtotal { get; set; }
 
     public virtual Cart? Cart { get; set; }
 
