@@ -1,15 +1,18 @@
 using FrostyBear.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace FrostyBear.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly FrostyBearContext _db;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(FrostyBearContext db, ILogger<HomeController> logger)
         {
+            _db = db;
             _logger = logger;
         }
 
