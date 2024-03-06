@@ -20,7 +20,7 @@ namespace FrostyBear.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("Shop");
+            return View();
         }
 
         public IActionResult Privacy()
