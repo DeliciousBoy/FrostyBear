@@ -155,8 +155,8 @@ namespace FrostyBear.Controllers
                 ViewBag.ErrorMessage = "ไม่พบข้อมูล";
                 return RedirectToAction("Index");
             }
-            ViewBag.pdtName = _db.Categories.FirstOrDefault(pt => pt.CategoryId == obj.CategoryId).CategoryName;
-            ViewBag.brandName = _db.Brands.FirstOrDefault(br => br.BrandId == obj.BrandId).BrandName;
+            ViewBag.pdtName = _db.Categories.FirstOrDefault(pt => pt.CategoryId == obj.CategoryId);
+            ViewBag.brandName = _db.Brands.FirstOrDefault(br => br.BrandId == obj.BrandId);
             return View(obj);
 
         }
