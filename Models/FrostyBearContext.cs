@@ -251,8 +251,8 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Sale>(entity =>
         {
-            entity.HasKey(e => e.SaleId).HasName("PK__Sales__E1EB00B27061783A");
 
+            entity.HasKey(e => e.SaleId).HasName("PK__Sales__E1EB00B27061783A");
             entity.Property(e => e.SaleId).HasColumnName("sale_id");
             entity.Property(e => e.CustomerId)
                 .HasMaxLength(50)
