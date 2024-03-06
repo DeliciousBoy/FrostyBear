@@ -5,7 +5,7 @@ namespace FrostyBear.Models;
 
 public partial class Product
 {
-    public int ProductId { get; set; }
+    public string ProductId { get; set; } = null!;
 
     public string ProductName { get; set; } = null!;
 

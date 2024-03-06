@@ -1,1 +1,73 @@
-﻿
+﻿@model IEnumerable<FrostyBear.ViewModels.PdVM>
+@{
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+
+<h1>Product Page</h1>
+
+@{
+    var stext = ViewBag.stext;
+}
+
+<form asp-controller="Product" asp-action="Index">
+    <div class="row">
+        <div class="col-sm-6 col-md-8 col-lg-9">
+            <a class="btn btn-primary" asp-action="Create">
+                <i class="bg-info bi-plus-lg"></i> เพิ่ม
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="input-group">
+                <span class="input-group-text">ค้นหา</span>
+                <input type="text" name="stext" class="form-control" value="@stext" />
+                <button type="submit" class="btn btn-secondary">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<table width="80%" class="table">
+    <tr>
+        <th></th>
+        <th>รหัสสินค้า</th>
+        <th>ชื่อสินค้า</th>
+        <th>ประเภท</th>
+        <th>ยี่ห้อ</th>
+        <th>ราคาขาย</th>
+        <th>คงเหลือ</th>
+    </tr>
+
+    @{
+        var i = 0;
+    }
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.CategoryName</td>
+            <td>@item.BrandName</td>
+            <td class="text-end">@item.ProductPrice</td>
+            <td class="text-end">@item.ProductStock</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-route-id="@item.ProductId">
+                    <i class="bi bi-pencil-square">แก้</i>
+                </a>
+            </td>
+            <td class="text-center">
+                <a asp-action="Delete" asp-route-id="@item.ProductId">
+                    <i class="bi bi-x-lg text-danger">ลบ</i>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
