@@ -36,6 +36,8 @@ namespace FrostyBear.Controllers
                                CategoryName = p_pt.CategoryName,
                                BrandName = p_b.BrandName,
                                ProductPrice = p.ProductPrice,
+                               ProductCost = p.ProductCost,
+                               ProductStock = p.ProductStock,
                                Detail = p.Detail
                            };
                 if (pdvm == null) return NotFound();
