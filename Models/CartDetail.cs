@@ -7,9 +7,9 @@ public partial class CartDetail
 {
     public int CartDetailId { get; set; }
 
-    public int? CartId { get; set; }
+    public int CartId { get; set; }
 
-    public int? ProductId { get; set; }
+    public string ProductId { get; set; } = null!;
 
     public double? Cdquantity { get; set; }
 
@@ -17,7 +17,7 @@ public partial class CartDetail
 
     public double? Cdtotal { get; set; }
 
-    public virtual Cart? Cart { get; set; }
+    public virtual Cart Cart { get; set; } = null!;
 
-    public virtual Product? Product { get; set; }
+    public virtual Product Product { get; set; } = null!;
 }

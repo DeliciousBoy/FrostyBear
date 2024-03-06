@@ -19,7 +19,5 @@ public partial class Transaction
 
     public virtual Customer? Customer { get; set; }
 
-    public virtual Employee? Employee { get; set; }
-
     public virtual Sale? Sale { get; set; }
 }
