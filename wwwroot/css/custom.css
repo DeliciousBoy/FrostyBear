@@ -6,29 +6,14 @@
     grid-template-rows: 60px 1fr;
 }
 
-,header{
-    background-color: #fff;
+.header {
+    background-color: #808080;
 }
 
 .sidebar{
-    background-color: #1c1f23;
+    background-color: #808080;
 }
 
-.main{
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    background-color: #c3c5ca;
+.main {
+    background-color: #000000;
 }
