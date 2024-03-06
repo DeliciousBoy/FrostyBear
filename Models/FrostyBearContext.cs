@@ -40,13 +40,14 @@ public partial class FrostyBearContext : DbContext
     public virtual DbSet<Transaction> Transactions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=FrostyBear;User ID=sa;Password=hello13;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E277B7F0A1A");
+            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E2796C83391");
 
             entity.Property(e => e.BrandId).HasColumnName("brand_id");
             entity.Property(e => e.BrandName)
@@ -57,16 +58,32 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartId).HasName("PK__Cart__2EF52A2752437C0A");
+            entity.HasKey(e => e.CartId).HasName("PK__Cart__2EF52A27347D40F6");
 
             entity.ToTable("Cart");
 
             entity.Property(e => e.CartId).HasColumnName("cart_id");
+            entity.Property(e => e.CartCf)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("cart_CF");
             entity.Property(e => e.CartDate)
                 .HasColumnType("datetime")
                 .HasColumnName("cart_date");
+            entity.Property(e => e.CartPay)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("cart_pay");
+            entity.Property(e => e.CartQty).HasColumnName("cart_Qty");
+            entity.Property(e => e.CartSend)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("cart_send");
+            entity.Property(e => e.CartVoid)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("cart_void");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
-            entity.Property(e => e.IsCheckedOut).HasColumnName("is_checked_out");
             entity.Property(e => e.TotalAmount)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -79,18 +96,16 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<CartDetail>(entity =>
         {
-            entity.HasKey(e => e.CartDetailId).HasName("PK__Cart_Det__0F08F529FFE7A5DB");
+            entity.HasKey(e => e.CartDetailId).HasName("PK__Cart_Det__0F08F52943408F57");
 
             entity.ToTable("Cart_Details");
 
             entity.Property(e => e.CartDetailId).HasColumnName("cart_detail_id");
             entity.Property(e => e.CartId).HasColumnName("cart_id");
-            entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.Cdprice).HasColumnName("CDprice");
+            entity.Property(e => e.Cdquantity).HasColumnName("CDquantity");
+            entity.Property(e => e.Cdtotal).HasColumnName("CDtotal");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
-            entity.Property(e => e.Quantity)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("quantity");
 
             entity.HasOne(d => d.Cart).WithMany(p => p.CartDetails)
                 .HasForeignKey(d => d.CartId)
@@ -103,7 +118,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B4253AF942");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B41B10964D");
 
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
@@ -114,7 +129,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__CD65CB85DFB263E7");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__CD65CB85339FE440");
 
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.CustomerAddress)
@@ -137,11 +152,13 @@ public partial class FrostyBearContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("customer_username");
+            entity.Property(e => e.Lastlogin).HasColumnName("lastlogin");
+            entity.Property(e => e.Startdate).HasColumnName("startdate");
         });
 
         modelBuilder.Entity<Delivery>(entity =>
         {
-            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F5F3323A4B");
+            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F58F9BBAEE");
 
             entity.Property(e => e.DeliveryId).HasColumnName("delivery_id");
             entity.Property(e => e.DeliveryDate)
@@ -156,7 +173,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__C52E0BA8D495C3CA");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__C52E0BA8D9622F97");
 
             entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
             entity.Property(e => e.EmployeeContact)
@@ -184,7 +201,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Position>(entity =>
         {
-            entity.HasKey(e => e.PositionId).HasName("PK__Position__99A0E7A4E6754C19");
+            entity.HasKey(e => e.PositionId).HasName("PK__Position__99A0E7A44264FAC0");
 
             entity.Property(e => e.PositionId).HasColumnName("position_id");
             entity.Property(e => e.PositionName)
@@ -195,7 +212,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__47027DF54FD19BBA");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__47027DF5F2EF5134");
 
             entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.BrandId).HasColumnName("brand_id");
@@ -203,6 +220,7 @@ public partial class FrostyBearContext : DbContext
             entity.Property(e => e.Detail)
                 .HasColumnType("text")
                 .HasColumnName("detail");
+            entity.Property(e => e.ProductCost).HasColumnName("product_cost");
             entity.Property(e => e.ProductName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -210,6 +228,7 @@ public partial class FrostyBearContext : DbContext
             entity.Property(e => e.ProductPrice)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("product_price");
+            entity.Property(e => e.ProductStock).HasColumnName("product_stock");
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Products)
                 .HasForeignKey(d => d.BrandId)
@@ -222,7 +241,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Sale>(entity =>
         {
-            entity.HasKey(e => e.SaleId).HasName("PK__Sales__E1EB00B20631AABA");
+            entity.HasKey(e => e.SaleId).HasName("PK__Sales__E1EB00B21DAD99A5");
 
             entity.Property(e => e.SaleId).HasColumnName("sale_id");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
@@ -248,7 +267,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<SalesDaily>(entity =>
         {
-            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF8F39F7425");
+            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF82EE526BB");
 
             entity.ToTable("Sales_Daily");
 
@@ -260,7 +279,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__85C600AF430C59FE");
+            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__85C600AF4C8651E4");
 
             entity.Property(e => e.TransactionId)
                 .ValueGeneratedNever()

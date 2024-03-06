@@ -7,7 +7,7 @@ public partial class Product
 {
     public int ProductId { get; set; }
 
-    public string? ProductName { get; set; }
+    public string ProductName { get; set; } = null!;
 
     public decimal? ProductPrice { get; set; }
 
@@ -16,6 +16,10 @@ public partial class Product
     public int? BrandId { get; set; }
 
     public string? Detail { get; set; }
+
+    public double? ProductCost { get; set; }
+
+    public int? ProductStock { get; set; }
 
     public virtual Brand? Brand { get; set; }
 

@@ -13,7 +13,15 @@ public partial class Cart
 
     public string? TotalAmount { get; set; }
 
-    public bool? IsCheckedOut { get; set; }
+    public double? CartQty { get; set; }
+
+    public string? CartCf { get; set; }
+
+    public string? CartPay { get; set; }
+
+    public string? CartSend { get; set; }
+
+    public string? CartVoid { get; set; }
 
     public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
 
