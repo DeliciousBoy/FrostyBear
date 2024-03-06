@@ -1,58 +1,51 @@
-﻿@model IEnumerable<FrostyBear.ViewModels.PdVM>
-@{
+﻿@model FrostyBear.Models.Employee
 
-}
-@{
-    var stext = ViewBag.stext;
-}
+<section class="vh-100" style="background-color: #F38BA0;">
 
-<h1>Product Page</h1>
-<form asp-controller="Product" asp-action="Index">
-    <div class="row">
-        <div class="col-sm-6 col-md-8 col-lg-9"></div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="input-group">
-                <span class="input-group-text">Search</span>
-                <input type="text" name="stext" class="form-control" value="@stext" />
-                <button type="submit" class="btn btn-secondary">OK</button>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="/images/choc_chip.png" alt="login form" class="img-fluid w-100 h-100" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+
+                                <form asp-action="#" method="post" class="w-100">
+
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                        <span class="h1 fw-bold mb-0">Frosty Bear</span>
+                                    </div>
+
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="EmployeeUsername">Username</label>
+                                        <input type="text" id="EmployeeUsername" name="EmployeeUsername" class="form-control form-control-lg" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="EmployeePassword">Password</label>
+                                        <input type="password" id="EmployeePassword" name="EmployeePassword" class="form-control form-control-lg" />
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                    </div>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                                        Don't have an account? <a href="#!"
+                                                                  style="color: #393f81;">Register here</a>
+                                    </p>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-</form>
-
-<table>
-    <tr>
-        <th></th>
-        <th>Product ID</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Brands</th>
-        <th>Price</th>
-        <th>Details</th>
-        <!---->
-    </tr>
-    @if (Model != null)
-    {
-        var i = 0;
-        foreach (var item in Model)
-        {
-            i++;
-            <tr>
-                <td>@i</td>
-                <td>@item.ProductId</td>
-                <td>@item.ProductName</td>
-                <td>@item.CategoryName</td>
-                <td>@item.BrandName</td>
-                <td>@item.ProductPrice</td>
-                <td>@item.Detail</td>
-            </tr>
-        }
-    }
-    else
-    {
-        <tr><td colspan="7">No products found</td></tr>
-    }
-
-</table>
+</section>

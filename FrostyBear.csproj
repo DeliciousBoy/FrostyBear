@@ -7,6 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\artic_vanilla.png" />
+    <Content Remove="wwwroot\images\avalance_almond.png" />
+    <Content Remove="wwwroot\images\Banana_cone.png" />
+    <Content Remove="wwwroot\images\ButterPecan_scoop.png" />
+    <Content Remove="wwwroot\images\Caramel_cone.png" />
+    <Content Remove="wwwroot\images\choc nuts.png" />
+    <Content Remove="wwwroot\images\choc_chip.png" />
+    <Content Remove="wwwroot\images\Coffe_cream.png" />
+    <Content Remove="wwwroot\images\Custard_scoop.png" />
+    <Content Remove="wwwroot\images\frosty_chocolate_dream.png" />
+    <Content Remove="wwwroot\images\frozen_toffee.png" />
+    <Content Remove="wwwroot\images\hazelnut_heaven.png" />
+    <Content Remove="wwwroot\images\icy_lemon_sorbet.png" />
+    <Content Remove="wwwroot\images\limoncello_dream.png" />
+    <Content Remove="wwwroot\images\Mango.png" />
+    <Content Remove="wwwroot\images\Matcha_cone.png" />
+    <Content Remove="wwwroot\images\Milk_cone.png" />
+    <Content Remove="wwwroot\images\minty_glacier_delight.png" />
+    <Content Remove="wwwroot\images\Papaya_cone.png" />
+    <Content Remove="wwwroot\images\Pink_Eillie.png" />
+    <Content Remove="wwwroot\images\pistachio_paradise.png" />
+    <Content Remove="wwwroot\images\snowflake_strawberry_swirl.png" />
+    <Content Remove="wwwroot\images\tiramisu_temptation.png" />
+    <Content Remove="wwwroot\images\yeti_cookie.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,5 +46,31 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\artic_vanilla.png" />
+    <None Include="wwwroot\images\avalance_almond.png" />
+    <None Include="wwwroot\images\Banana_cone.png" />
+    <None Include="wwwroot\images\ButterPecan_scoop.png" />
+    <None Include="wwwroot\images\Caramel_cone.png" />
+    <None Include="wwwroot\images\choc nuts.png" />
+    <None Include="wwwroot\images\choc_chip.png" />
+    <None Include="wwwroot\images\Coffe_cream.png" />
+    <None Include="wwwroot\images\Custard_scoop.png" />
+    <None Include="wwwroot\images\frosty_chocolate_dream.png" />
+    <None Include="wwwroot\images\frozen_toffee.png" />
+    <None Include="wwwroot\images\hazelnut_heaven.png" />
+    <None Include="wwwroot\images\icy_lemon_sorbet.png" />
+    <None Include="wwwroot\images\limoncello_dream.png" />
+    <None Include="wwwroot\images\Mango.png" />
+    <None Include="wwwroot\images\Matcha_cone.png" />
+    <None Include="wwwroot\images\Milk_cone.png" />
+    <None Include="wwwroot\images\minty_glacier_delight.png" />
+    <None Include="wwwroot\images\Papaya_cone.png" />
+    <None Include="wwwroot\images\Pink_Eillie.png" />
+    <None Include="wwwroot\images\pistachio_paradise.png" />
+    <None Include="wwwroot\images\snowflake_strawberry_swirl.png" />
+    <None Include="wwwroot\images\tiramisu_temptation.png" />
+    <None Include="wwwroot\images\yeti_cookie.png" />
   </ItemGroup>
 </Project>
