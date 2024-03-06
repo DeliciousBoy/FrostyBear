@@ -4,11 +4,10 @@ namespace FrostyBear.Controllers
 {
     public class AboutController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
            
-            //return View();
-            return "RAWEE26488";
+            return View();
         }
     }
 }
