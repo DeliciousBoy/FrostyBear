@@ -71,7 +71,7 @@ namespace FrostyBear.Controllers
             }
         }
 
-        public IActionResult Crate()
+        public IActionResult Create()
         {
             ViewData["Categories"] = new SelectList(_db.Categories, "CategoryId", "CategoryName");
             ViewData["Brand"] = new SelectList(_db.Brands, "BrandId", "BrandName");
