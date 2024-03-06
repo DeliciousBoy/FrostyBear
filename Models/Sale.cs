@@ -9,7 +9,7 @@ public partial class Sale
 
     public string ProductId { get; set; } = null!;
 
-    public int CustomerId { get; set; }
+    public string CustomerId { get; set; } = null!;
 
     public int EmployeeId { get; set; }
 
