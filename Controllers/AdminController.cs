@@ -6,18 +6,24 @@ namespace FrostyBear.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly FrostyBearContext _db;
+        
+        public readonly FrostyBearContext _db;
         public AdminController(FrostyBearContext db) { _db = db; }
-
-
-        public ActionResult Index() 
+        public IActionResult Index() 
         { 
+            
             if(HttpContext.Session.GetString("EmployeeUsername") == null) 
             {  
                 return RedirectToAction("AdminLogin"); 
             }
+            
             return View();
         }
+        public IActionResult AdminLogin()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AdminLogin(String username, string password)
@@ -37,29 +43,21 @@ namespace FrostyBear.Controllers
             
             foreach (var item in users)
             {
-                
+
                 EmployeeUsername = item.EmployeeUsername;
                 HttpContext.Session.SetString("EmployeeUsername", EmployeeUsername);
 
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult AdminLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
         
+
+
     }
 }
-
-
-/* var user = await _db.Employees.FirstOrDefaultAsync(u => u.EmployeeUsername == model.EmployeeUsername && u.EmployeePassword == model.EmployeePassword);
-
-            if (user != null)
-            {
-                TempData["SuccessMessage"] = "เข้าสู่ระบบสำเร็จ!";
-                return RedirectToAction("Index", "Dashboard"); // นำไปยังหน้า Dashboard
-                
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
-                return View(model);
-            }
-*/
