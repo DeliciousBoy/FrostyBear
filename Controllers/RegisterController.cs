@@ -1,5 +1,7 @@
 ﻿using FrostyBear.Models;
 using Microsoft.AspNetCore.Mvc;
+using FrostyBear.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -17,34 +19,34 @@ namespace FrostyBear.Controllers
         // GET: /Register
         public IActionResult Index()
         {
-            return View(new Customer());
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] // Add this line for security
-        public async Task<IActionResult> Register(Customer model)
+        [ValidateAntiForgeryToken]
+        public IActionResult Register(Customer Cusobj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Check if the username is already taken
-                var existingUser = await _db.Customers.FirstOrDefaultAsync(u => u.CustomerUsername == model.CustomerUsername);
-
-                if (existingUser != null)
+                if (ModelState.IsValid)
                 {
-                    TempData["ErrorMessage"] = "Username already exists.";
-                    return RedirectToAction("Index");
+                   //_db.Products.Add(Cusobj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
                 }
-
-                // Add the new user to the database
-                _db.Customers.Add(model);
-                await _db.SaveChangesAsync();
-
-                TempData["SuccessMessage"] = "Account created successfully.";
-                return RedirectToAction("Index");
             }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View(Cusobj);
+            }
+            ViewBag.ErrorMessage = "การบันทึกผิดพลาด";
+            return View(Cusobj);
 
-            // If model state is not valid, return to the registration page with validation errors
-            return View("Index", model);
         }
     }
     }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+<!DOCTYPE html>
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 <html lang="en">
@@ -31,6 +34,29 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
                         </li>
                     </ul>
+                </div>
+                <div class="text-end pe-3">
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("CusId") == null)
+                    {
+                        <a class="btn btn-danger text-white"
+                           asp-controller="ShopLogin" asp-action="Login">
+                            Login
+                        </a>
+                    
+                        }
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("CusId") != null)
+                    {
+
+                        var CusName = @HttpContextAccessor.HttpContext.Session.GetString("CusName");
+                        var CusId = @HttpContextAccessor.HttpContext.Session.GetString("CusId");
+
+
+                        <a class="btn btn-danger text-white"
+                           asp-controller="ShopLogin" asp-action="Logout"
+                           onclick="return confirm('ออกจากระบบ')">
+                            Logout
+                        </a>
+                    }
                 </div>
             </div>
         </nav>

@@ -19,21 +19,51 @@ namespace FrostyBear.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(Customer model)
+        public IActionResult Login()
         {
-            var user = await _db.Customers.FirstOrDefaultAsync(u => u.CustomerUsername == model.CustomerUsername && u.CustomerPassword == model.CustomerPassword);
+            return View();
+        }
 
-            if (user != null)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(string CUsername, string CPassword)
+        {
+            var cus = from c in _db.Customers
+                      where c.CustomerUsername.Equals(CUsername)
+                      && c.CustomerPassword.Equals(CPassword)
+                      select c;
+
+            if (cus.ToList().Count() == 0)
             {
-                TempData["SuccessMessage"] = "Login successful!";
-                return RedirectToAction("Index", "About"); // Redirect to the dashboard
+                TempData["ErrorMessage"] = "ไม่พบข้อมูล";
+                return RedirectToAction("Index");
             }
-            else
+
+            string CusId;
+            string CusName;
+
+            foreach (var item in cus)
             {
-                TempData["ErrorMessage"] = "Incorrect username or password.";
-                return RedirectToAction("Index"); // Redirect back to the login page
+                CusId = item.CustomerId;
+                CusName = item.CustomerUsername;
+
+                HttpContext.Session.SetString("CusId", CusId);
+                HttpContext.Session.SetString("CusName", CusName);
+
+                var theRecord = _db.Customers.Find(CusId);
+                theRecord.Lastlogin = DateOnly.FromDateTime(DateTime.Now);
+
+                _db.Entry(theRecord).State = EntityState.Modified;
             }
+
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
