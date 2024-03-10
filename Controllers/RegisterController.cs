@@ -34,7 +34,7 @@ namespace FrostyBear.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                   //_db.Products.Add(Cusobj);
+                    _db.Customers.Add(Cusobj);
                     _db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }

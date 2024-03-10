@@ -7,11 +7,11 @@ public partial class Customer
 {
     public string CustomerId { get; set; } = null!;
 
-    public string CustomerName { get; set; } = null!;
+    public string? CustomerName { get; set; }
 
     public string? CustomerAddress { get; set; }
 
-    public string CustomerContact { get; set; } = null!;
+    public string? CustomerContact { get; set; }
 
     public string CustomerUsername { get; set; } = null!;
 
