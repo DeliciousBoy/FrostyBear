@@ -4,6 +4,7 @@ using FrostyBear.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace FrostyBear.Controllers
 {
@@ -33,12 +34,18 @@ namespace FrostyBear.Controllers
             var cus = from c in _db.Customers
                       where c.CustomerUsername.Equals(CustomerUsername)
                       select c;
+            var lastcus = _db.Customers
+                                .OrderByDescending(c => c.CustomerId)
+                                .Select(c => c.CustomerId)
+                                .FirstOrDefault();
             try
             {
                 if (ModelState.IsValid)
                 {
                     if (cus.ToList().Count() == 0)
                     {
+                        string newUserId = lastcus.Substring(0, 1) + (int.Parse(lastcus.Substring(1)) + 1).ToString("D3");
+                        Cusobj.CustomerId = newUserId;
                         Cusobj.Startdate = DateOnly.FromDateTime(DateTime.Now);
                         _db.Customers.Add(Cusobj);
                         _db.SaveChanges();

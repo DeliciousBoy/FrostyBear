@@ -82,10 +82,16 @@ namespace FrostyBear.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Product obj)
         {
+            var lastprod = _db.Products
+                                .OrderByDescending(p => p.ProductId)
+                                .Select(p => p.ProductId)
+                                .FirstOrDefault();
             try
             {
                 if (ModelState.IsValid)
                 {
+                    string newprodId = lastprod.Substring(0, 1) + (int.Parse(lastprod.Substring(1)) + 1).ToString("D3");
+                    obj.ProductId = newprodId;
                     _db.Products.Add(obj);  
                     _db.SaveChanges(); 
                     return RedirectToAction("Index"); 
