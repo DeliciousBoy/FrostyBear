@@ -28,15 +28,26 @@ namespace FrostyBear.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(Customer Cusobj)
+        public IActionResult Register(Customer Cusobj,string CustomerUsername)
         {
+            var cus = from c in _db.Customers
+                      where c.CustomerUsername.Equals(CustomerUsername)
+                      select c;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _db.Customers.Add(Cusobj);
-                    _db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    if (cus.ToList().Count() == 0)
+                    {
+                        Cusobj.Startdate = DateOnly.FromDateTime(DateTime.Now);
+                        _db.Customers.Add(Cusobj);
+                        _db.SaveChanges();
+                        return RedirectToAction("Index", "ShopLogin");
+                    }
+                    else {
+                        TempData["ErrorMessage"] = "มีคนใช่ชื่อนี้แล้ว";
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch (Exception ex)

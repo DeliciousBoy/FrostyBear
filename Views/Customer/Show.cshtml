@@ -1,0 +1,84 @@
+﻿@model FrostyBear.Models.Customer
+
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h1>Show</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <img src="@ViewBag.ImgFile" width="250" class="shadow" />
+            <div class="row mt-2">
+                <div class="col">
+                    <a class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันลบรูป')"
+                       asp-action="ImgDelete" asp-route-id="@Model.CustomerId">
+                        <i class="bi bi-x-lg"></i> ลบรูปภาพ
+                    </a>
+                </div>
+            </div>
+        </div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomerName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CustomerAddress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomerAddress)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CustomerContact)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomerContact)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CustomerUsername)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomerUsername)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CustomerPassword)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomerPassword)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Startdate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Startdate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Lastlogin)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Lastlogin)
+            </dd>
+        </dl>
+        <div class="row">
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" asp-action="ImgUpload">
+                    <input name="theid" type="hidden" value="@Model.CustomerId" />
+                    <input type="file" accept="image/jpeg" name="imgfiles"
+                           class="form-control" required />
+                    <button type="submit" class="btn btn-success mt-4">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CustomerId">Edit</a> |
+    <a asp-controller="Home" asp-action="Index">Back to List</a>
+</div>
