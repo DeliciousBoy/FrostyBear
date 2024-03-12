@@ -47,7 +47,7 @@ public partial class FrostyBearContext : DbContext
     {
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E2786000CA0");
+            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E275044B58D");
 
             entity.Property(e => e.BrandId).HasColumnName("brand_id");
             entity.Property(e => e.BrandName)
@@ -99,7 +99,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B4EE7D9CC1");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B4B8D28D08");
 
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
@@ -141,7 +141,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Delivery>(entity =>
         {
-            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F54E7AEAC0");
+            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F5542A15E7");
 
             entity.Property(e => e.DeliveryId).HasColumnName("delivery_id");
             entity.Property(e => e.DeliveryDate)
@@ -252,7 +252,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<SalesDaily>(entity =>
         {
-            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF82D591CE0");
+            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF863F44C4B");
 
             entity.ToTable("Sales_Daily");
 
