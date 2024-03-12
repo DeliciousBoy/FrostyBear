@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<FrostyBear.ViewModels.PdVM>
 @{
+    Layout = "AdminLayout";
 }
 @if (ViewBag.ErrorMessage != null)
 {
@@ -8,13 +9,10 @@
     </div>
 }
 
-
-<h1>Product Page</h1>
-
 @{
     var stext = ViewBag.stext;
 }
-
+<!-- 
 <form asp-controller="Product" asp-action="Index">
     <div class="row">
         <div class="col-sm-6 col-md-8 col-lg-9">
@@ -33,6 +31,8 @@
         </div>
     </div>
 </form>
+-->
+<!-- 
 <table width="80%" class="table">
     <tr>
         <th></th>
@@ -43,7 +43,7 @@
         <th>ราคาขาย</th>
         <th>คงเหลือ</th>
     </tr>
-
+    @*
     @{
         var i = 0;
     }
@@ -70,4 +70,79 @@
             </td>
         </tr>
     }
+    *@
 </table>
+-->
+
+
+<h1 class="h3 mb-2 text-gray-800">Tables</h1>
+<p class="mb-4">
+    DataTables is a third party plugin that is used to generate the demo table below.
+    For more information about DataTables, please visit the <a target="_blank"
+                                                               href="https://datatables.net">official DataTables documentation</a>.
+</p>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <th>Product ID</th>
+                        <th>Prodcut Name</th>
+                        <th>Category Name</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <th>Product ID</th>
+                        <th>Prodcut Name</th>
+                        <th>Category Name</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @{
+                        var i = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        i++;
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.ProductId</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.BrandName</td>
+                            <td class="text-end">@item.ProductPrice</td>
+                            <td class="text-end">@item.ProductStock</td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.ProductId">
+                                    <i class="bi bi-pencil-square">แก้</i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a asp-action="Delete" asp-route-id="@item.ProductId">
+                                    <i class="bi bi-x-lg text-danger">ลบ</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+                <

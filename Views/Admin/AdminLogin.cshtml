@@ -15,6 +15,11 @@
     }
 </div>
 
+
+
+<!doctype html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,10 +38,12 @@
                     <div class="col-md-8 col-lg-6 col-xxl-3">
                         <div class="card mb-0">
                             <div class="card-body">
-                                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="/admin/assets/images/logos/dark-logo.svg" width="180" alt="">
+                                <a class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                    <!-- <img src="/admin/assets/images/logos/dark-logo.svg" width="180" alt=""> -->
+                                    <img src="\assets\images\logos\FrostyBearLogo.png" width="180" alt="">
+
                                 </a>
-                                <p class="text-center">Your Social Campaigns</p>
+                                <p class="text-center">Hello welcome</p>
                                 <!-- Form login -->
                                 <form asp-controller="Admin" asp-action="AdminLogin" method="POST">
                                     <!-- <div asp-validation-summary="ModelOnly" class="text-danger"></div> -->
@@ -52,7 +59,7 @@
                                             This is a warning message for password.
                                         </div>
                                     </div>
-
+                                    
                                     <div class="class=" btn btn-primary w-100 fs-4 mb-4 rounded-2">
                                         <input type="submit" value="Login" class="btn btn-primary" />
                                     </div>
@@ -71,3 +78,24 @@
 
 </html>
 
+
+
+<script>
+
+    //when enter login page cursor will focus on username input 
+    window.onload = function () {
+        document.getElementById("username").focus();
+    };
+
+    // Function to handle keydown event on username input
+    document.getElementById("username").addEventListener("keydown", function (event) {
+        // Check if the pressed key is Enter
+        if (event.key === "Enter") {
+            // Prevent the default form submission
+            event.preventDefault();
+            // Focus on the password input
+            document.getElementById("password").focus();
+        }
+    });
+
+</script>
