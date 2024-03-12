@@ -7,30 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\images\artic_vanilla.png" />
-    <Content Remove="wwwroot\images\avalance_almond.png" />
-    <Content Remove="wwwroot\images\Banana_cone.png" />
-    <Content Remove="wwwroot\images\ButterPecan_scoop.png" />
-    <Content Remove="wwwroot\images\Caramel_cone.png" />
-    <Content Remove="wwwroot\images\choc nuts.png" />
-    <Content Remove="wwwroot\images\choc_chip.png" />
-    <Content Remove="wwwroot\images\Coffe_cream.png" />
-    <Content Remove="wwwroot\images\Custard_scoop.png" />
-    <Content Remove="wwwroot\images\frosty_chocolate_dream.png" />
-    <Content Remove="wwwroot\images\frozen_toffee.png" />
-    <Content Remove="wwwroot\images\hazelnut_heaven.png" />
-    <Content Remove="wwwroot\images\icy_lemon_sorbet.png" />
-    <Content Remove="wwwroot\images\limoncello_dream.png" />
-    <Content Remove="wwwroot\images\Mango.png" />
-    <Content Remove="wwwroot\images\Matcha_cone.png" />
-    <Content Remove="wwwroot\images\Milk_cone.png" />
-    <Content Remove="wwwroot\images\minty_glacier_delight.png" />
-    <Content Remove="wwwroot\images\Papaya_cone.png" />
-    <Content Remove="wwwroot\images\Pink_Eillie.png" />
-    <Content Remove="wwwroot\images\pistachio_paradise.png" />
-    <Content Remove="wwwroot\images\snowflake_strawberry_swirl.png" />
-    <Content Remove="wwwroot\images\tiramisu_temptation.png" />
-    <Content Remove="wwwroot\images\yeti_cookie.png" />
+    <Content Remove="wwwroot\images\p001.png" />
+    <Content Remove="wwwroot\images\p002.png" />
+    <Content Remove="wwwroot\images\p003.png" />
+    <Content Remove="wwwroot\images\p004.png" />
+    <Content Remove="wwwroot\images\p005.png" />
+    <Content Remove="wwwroot\images\p006.png" />
+    <Content Remove="wwwroot\images\p007.png" />
+    <Content Remove="wwwroot\images\p008.png" />
+    <Content Remove="wwwroot\images\p009.png" />
+    <Content Remove="wwwroot\images\p010.png" />
+    <Content Remove="wwwroot\images\p011.png" />
+    <Content Remove="wwwroot\images\p012.png" />
+    <Content Remove="wwwroot\images\p013.png" />
+    <Content Remove="wwwroot\images\p014.png" />
+    <Content Remove="wwwroot\images\p015.png" />
+    <Content Remove="wwwroot\images\p016.png" />
+    <Content Remove="wwwroot\images\p017.png" />
+    <Content Remove="wwwroot\images\p018.png" />
+    <Content Remove="wwwroot\images\p019.png" />
+    <Content Remove="wwwroot\images\p020.png" />
+    <Content Remove="wwwroot\images\p021.png" />
+    <Content Remove="wwwroot\images\p022.png" />
+    <Content Remove="wwwroot\images\p023.png" />
+    <Content Remove="wwwroot\images\p024.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,29 +46,29 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\images\artic_vanilla.png" />
-    <None Include="wwwroot\images\avalance_almond.png" />
-    <None Include="wwwroot\images\Banana_cone.png" />
-    <None Include="wwwroot\images\ButterPecan_scoop.png" />
-    <None Include="wwwroot\images\Caramel_cone.png" />
-    <None Include="wwwroot\images\choc nuts.png" />
-    <None Include="wwwroot\images\choc_chip.png" />
-    <None Include="wwwroot\images\Coffe_cream.png" />
-    <None Include="wwwroot\images\Custard_scoop.png" />
-    <None Include="wwwroot\images\frosty_chocolate_dream.png" />
-    <None Include="wwwroot\images\frozen_toffee.png" />
-    <None Include="wwwroot\images\hazelnut_heaven.png" />
-    <None Include="wwwroot\images\icy_lemon_sorbet.png" />
-    <None Include="wwwroot\images\limoncello_dream.png" />
-    <None Include="wwwroot\images\Mango.png" />
-    <None Include="wwwroot\images\Matcha_cone.png" />
-    <None Include="wwwroot\images\Milk_cone.png" />
-    <None Include="wwwroot\images\minty_glacier_delight.png" />
-    <None Include="wwwroot\images\Papaya_cone.png" />
-    <None Include="wwwroot\images\Pink_Eillie.png" />
-    <None Include="wwwroot\images\pistachio_paradise.png" />
-    <None Include="wwwroot\images\snowflake_strawberry_swirl.png" />
-    <None Include="wwwroot\images\tiramisu_temptation.png" />
-    <None Include="wwwroot\images\yeti_cookie.png" />
+    <None Include="wwwroot\images\p022.png" />
+    <None Include="wwwroot\images\p004.png" />
+    <None Include="wwwroot\images\p011.png" />
+    <None Include="wwwroot\images\p015.png" />
+    <None Include="wwwroot\images\p010.png" />
+    <None Include="wwwroot\images\p017.png" />
+    <None Include="wwwroot\images\p016.png" />
+    <None Include="wwwroot\images\p013.png" />
+    <None Include="wwwroot\images\p014.png" />
+    <None Include="wwwroot\images\p023.png" />
+    <None Include="wwwroot\images\p003.png" />
+    <None Include="wwwroot\images\p020.png" />
+    <None Include="wwwroot\images\p012.png" />
+    <None Include="wwwroot\images\p021.png" />
+    <None Include="wwwroot\images\p009.png" />
+    <None Include="wwwroot\images\p005.png" />
+    <None Include="wwwroot\images\p006.png" />
+    <None Include="wwwroot\images\p024.png" />
+    <None Include="wwwroot\images\p007.png" />
+    <None Include="wwwroot\images\p008.png" />
+    <None Include="wwwroot\images\p019.png" />
+    <None Include="wwwroot\images\p001.png" />
+    <None Include="wwwroot\images\p018.png" />
+    <None Include="wwwroot\images\p002.png" />
   </ItemGroup>
 </Project>

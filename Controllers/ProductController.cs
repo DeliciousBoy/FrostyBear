@@ -43,32 +43,29 @@ namespace FrostyBear.Controllers
             {
                 return RedirectToAction("Index");
             }
-            {
-                var pdvm = from p in _db.Products
-                           join pt in _db.Categories on p.CategoryId equals pt.CategoryId into join_p_pt
-                           from p_pt in join_p_pt.DefaultIfEmpty()
-                           join b in _db.Brands on p.BrandId equals b.BrandId into join_p_b
-                           from p_b in join_p_b.DefaultIfEmpty()
 
-                           where p.ProductName.Contains(stext)||
-                           p_b.BrandName.Contains(stext)||
-                           p_pt.CategoryName.Contains(stext)
+            var pdvm = from p in _db.Products
+                       join pt in _db.Categories on p.CategoryId equals pt.CategoryId into join_p_pt
+                       from p_pt in join_p_pt.DefaultIfEmpty()
+                       join b in _db.Brands on p.BrandId equals b.BrandId into join_p_b
+                       from p_b in join_p_b.DefaultIfEmpty()
+                       where p.ProductName.Contains(stext) ||
+                             p_b.BrandName.Contains(stext) ||
+                             p_pt.CategoryName.Contains(stext)
+                       select new PdVM
+                       {
+                           ProductId = p.ProductId,
+                           ProductName = p.ProductName,
+                           CategoryName = p_pt.CategoryName,
+                           BrandName = p_b.BrandName,
+                           ProductPrice = p.ProductPrice,
+                           ProductCost = p.ProductCost,
+                           ProductStock = p.ProductStock,
+                           Detail = p.Detail
+                       };
 
-                           select new PdVM
-                           {
-                               ProductId = p.ProductId,
-                               ProductName = p.ProductName,
-                               CategoryName = p_pt.CategoryName,
-                               BrandName = p_b.BrandName,
-                               ProductPrice = p.ProductPrice,
-                               ProductCost = p.ProductCost,
-                               ProductStock = p.ProductStock,
-                               Detail = p.Detail
-                           };
-                if (pdvm == null) return NotFound();
-                ViewBag.stext = stext;
-                return View(pdvm);
-            }
+            ViewBag.stext = stext;
+            return View(pdvm);
         }
 
         public IActionResult Create()
@@ -86,9 +83,9 @@ namespace FrostyBear.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _db.Products.Add(obj);  
-                    _db.SaveChanges(); 
-                    return RedirectToAction("Index"); 
+                    _db.Products.Add(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -113,8 +110,8 @@ namespace FrostyBear.Controllers
                 ViewBag.ErrorMessage = "ไม่พบข้อมูล";
                 return RedirectToAction("Index");
             }
-            ViewData["Categories"] = new SelectList(_db.Categories, "CategoryId", "CategoryName",obj.ProductId);
-            ViewData["Brand"] = new SelectList(_db.Brands, "BrandId", "BrandName",obj.BrandId);
+            ViewData["Categories"] = new SelectList(_db.Categories, "CategoryId", "CategoryName", obj.ProductId);
+            ViewData["Brand"] = new SelectList(_db.Brands, "BrandId", "BrandName", obj.BrandId);
             return View(obj);
         }
 
@@ -183,6 +180,31 @@ namespace FrostyBear.Controllers
                 ViewBag.ErrorMessage = ex.Message;
                 return RedirectToAction("Index");
             }
+        }
+
+        [HttpGet]
+        [Route("/api/categories")]
+        public IActionResult GetCategories()
+        {
+            var categories = _db.Categories.ToList();
+            return Json(categories);
+        }
+
+        [HttpGet]
+        [Route("/api/products")]
+        public IActionResult GetProducts(int categoryId)
+        {
+            var products = _db.Products.Where(p => p.CategoryId == categoryId).ToList();
+            return Json(products);
+        }
+
+        [HttpPost]
+        public ActionResult GetStock(string PrefixPdId)
+        {
+            var stockRemain = (from p in _db.Products
+                               where p.ProductId.StartsWith(PrefixPdId)
+                               select p.ProductStock).FirstOrDefault();
+            return Content(stockRemain.ToString());
         }
     }
 }

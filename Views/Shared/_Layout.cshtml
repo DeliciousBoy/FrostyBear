@@ -36,6 +36,19 @@
                     </ul>
                 </div>
                 <div class="text-end pe-3">
+                    <!--แสดงข้อมูลตะกร้า-->
+                    @if (@HttpContextAccessor.HttpContext.Session.GetString("CartId") != null)
+                    {
+                        var CartId = HttpContextAccessor.HttpContext.Session.GetString("CartId");
+                        var CartMoney = HttpContextAccessor.HttpContext.Session.GetString("CartMoney");
+                        var CartQty = HttpContextAccessor.HttpContext.Session.GetString("CartQty");
+
+                        <a class="btn btn-success opacity-50 text-white mx-2">
+                            @CartId [@CartMoney][@CartQty]
+                        </a>
+                    }
+
+
                     @if (HttpContextAccessor.HttpContext.Session.GetString("CusId") == null)
                     {
                         <a class="btn btn-danger text-white"
@@ -63,6 +76,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+
             @RenderBody()
         </main>
     </div>

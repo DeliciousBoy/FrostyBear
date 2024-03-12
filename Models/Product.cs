@@ -9,7 +9,7 @@ public partial class Product
 
     public string ProductName { get; set; } = null!;
 
-    public decimal? ProductPrice { get; set; }
+    public double? ProductPrice { get; set; }
 
     public int? CategoryId { get; set; }
 
@@ -19,11 +19,13 @@ public partial class Product
 
     public double? ProductCost { get; set; }
 
-    public int? ProductStock { get; set; }
+    public double? ProductStock { get; set; }
+
+    public DateOnly? PdLastSale { get; set; }
+
+    public DateOnly? PdLastBuy { get; set; }
 
     public virtual Brand? Brand { get; set; }
-
-    public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
 
     public virtual Category? Category { get; set; }
 

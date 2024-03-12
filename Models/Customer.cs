@@ -7,11 +7,11 @@ public partial class Customer
 {
     public string CustomerId { get; set; } = null!;
 
-    public string? CustomerName { get; set; }
+    public string CustomerName { get; set; } = null!;
 
     public string? CustomerAddress { get; set; }
 
-    public string? CustomerContact { get; set; }
+    public string CustomerContact { get; set; } = null!;
 
     public string CustomerUsername { get; set; } = null!;
 
@@ -20,8 +20,6 @@ public partial class Customer
     public DateOnly? Startdate { get; set; }
 
     public DateOnly? Lastlogin { get; set; }
-
-    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 

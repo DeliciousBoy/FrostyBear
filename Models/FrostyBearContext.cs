@@ -19,7 +19,7 @@ public partial class FrostyBearContext : DbContext
 
     public virtual DbSet<Cart> Carts { get; set; }
 
-    public virtual DbSet<CartDetail> CartDetails { get; set; }
+    public virtual DbSet<CartDtl> CartDtls { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
 
@@ -47,7 +47,7 @@ public partial class FrostyBearContext : DbContext
     {
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E279D299EC4");
+            entity.HasKey(e => e.BrandId).HasName("PK__Brands__5E5A8E2786000CA0");
 
             entity.Property(e => e.BrandId).HasColumnName("brand_id");
             entity.Property(e => e.BrandName)
@@ -58,73 +58,48 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartId).HasName("PK__Cart__2EF52A27347D40F6");
-
-            entity.ToTable("Cart");
-
-            entity.Property(e => e.CartId).HasColumnName("cart_id");
+            entity.Property(e => e.CartId)
+                .HasMaxLength(50)
+                .HasColumnName("CartID");
             entity.Property(e => e.CartCf)
                 .HasMaxLength(1)
+                .HasDefaultValue("N")
                 .IsFixedLength()
-                .HasColumnName("cart_CF");
-            entity.Property(e => e.CartDate)
-                .HasColumnType("datetime")
-                .HasColumnName("cart_date");
+                .HasColumnName("CartCF");
             entity.Property(e => e.CartPay)
                 .HasMaxLength(1)
-                .IsFixedLength()
-                .HasColumnName("cart_pay");
-            entity.Property(e => e.CartQty).HasColumnName("cart_Qty");
+                .HasDefaultValue("N")
+                .IsFixedLength();
             entity.Property(e => e.CartSend)
                 .HasMaxLength(1)
-                .IsFixedLength()
-                .HasColumnName("cart_send");
+                .IsFixedLength();
             entity.Property(e => e.CartVoid)
                 .HasMaxLength(1)
-                .IsFixedLength()
-                .HasColumnName("cart_void");
+                .HasDefaultValue("N")
+                .IsFixedLength();
             entity.Property(e => e.CustomerId)
                 .HasMaxLength(50)
                 .HasColumnName("customer_id");
-            entity.Property(e => e.TotalAmount)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("total_amount");
-
-            entity.HasOne(d => d.Customer).WithMany(p => p.Carts)
-                .HasForeignKey(d => d.CustomerId)
-                .HasConstraintName("FK__Cart__customer_i__4CA06362");
         });
 
-        modelBuilder.Entity<CartDetail>(entity =>
+        modelBuilder.Entity<CartDtl>(entity =>
         {
-            entity.HasKey(e => e.CartDetailId).HasName("PK__Cart_Det__0F08F52943408F57");
+            entity.HasKey(e => new { e.CartId, e.ProductId }).HasName("PK_CartDtl");
 
-            entity.ToTable("Cart_Details");
-
-            entity.Property(e => e.CartDetailId).HasColumnName("cart_detail_id");
-            entity.Property(e => e.CartId).HasColumnName("cart_id");
-            entity.Property(e => e.Cdprice).HasColumnName("CDprice");
-            entity.Property(e => e.Cdquantity).HasColumnName("CDquantity");
-            entity.Property(e => e.Cdtotal).HasColumnName("CDtotal");
+            entity.Property(e => e.CartId)
+                .HasMaxLength(50)
+                .HasColumnName("CartID");
             entity.Property(e => e.ProductId)
                 .HasMaxLength(50)
                 .HasColumnName("product_id");
-
-            entity.HasOne(d => d.Cart).WithMany(p => p.CartDetails)
-                .HasForeignKey(d => d.CartId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart_Deta__cart___4D94879B");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.CartDetails)
-                .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart_Deta__produ__4E88ABD4");
+            entity.Property(e => e.CdtlMoney).HasColumnName("CDtlMoney");
+            entity.Property(e => e.CdtlPrice).HasColumnName("CDtlPrice");
+            entity.Property(e => e.CdtlQty).HasColumnName("CDtlQty");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B4B07BD511");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__D54EE9B4EE7D9CC1");
 
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
@@ -166,7 +141,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<Delivery>(entity =>
         {
-            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F5BA2B20C7");
+            entity.HasKey(e => e.DeliveryId).HasName("PK__Deliveri__1C5CF4F54E7AEAC0");
 
             entity.Property(e => e.DeliveryId).HasColumnName("delivery_id");
             entity.Property(e => e.DeliveryDate)
@@ -235,9 +210,7 @@ public partial class FrostyBearContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("product_name");
-            entity.Property(e => e.ProductPrice)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("product_price");
+            entity.Property(e => e.ProductPrice).HasColumnName("product_price");
             entity.Property(e => e.ProductStock).HasColumnName("product_stock");
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Products)
@@ -279,7 +252,7 @@ public partial class FrostyBearContext : DbContext
 
         modelBuilder.Entity<SalesDaily>(entity =>
         {
-            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF8DE36CD37");
+            entity.HasKey(e => e.SaleDate).HasName("PK__Sales_Da__387C7FF82D591CE0");
 
             entity.ToTable("Sales_Daily");
 

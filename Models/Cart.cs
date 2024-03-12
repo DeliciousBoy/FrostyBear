@@ -5,13 +5,13 @@ namespace FrostyBear.Models;
 
 public partial class Cart
 {
-    public int CartId { get; set; }
+    public string CartId { get; set; } = null!;
 
     public string? CustomerId { get; set; }
 
-    public DateTime? CartDate { get; set; }
+    public DateOnly? CartDate { get; set; }
 
-    public string? TotalAmount { get; set; }
+    public double? CartMoney { get; set; }
 
     public double? CartQty { get; set; }
 
@@ -22,8 +22,4 @@ public partial class Cart
     public string? CartSend { get; set; }
 
     public string? CartVoid { get; set; }
-
-    public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
-
-    public virtual Customer? Customer { get; set; }
 }

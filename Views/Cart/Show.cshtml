@@ -1,0 +1,75 @@
+﻿@using FrostyBear.ViewModels;
+@using System.Globalization;
+@model dynamic
+
+@{
+    ViewData["Title"] = "Your Shopping Cart";
+}
+
+<div class="container">
+    <!-- แสดงข้อความแจ้งเตือน -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-warning">@TempData["ErrorMessage"]</div>
+    }
+</div>
+
+<div class="container mt-5">
+    <h1>Your Shopping Cart</h1>
+
+    <!-- แสดงรายละเอียดของตะกร้า -->
+    @foreach (Cart cart in Model.Master)
+    {
+        <div class="card bg-light mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-primary opacity-75">Order Number: @cart.CartId</h4>
+                <h5 class="card-subtitle mt-2 text-muted">Order Date: @cart.CartDate.Value.ToString("yyyy-MMM-dd", CultureInfo.InvariantCulture)</h5>
+                <div class="text-danger text-end">
+                    Number of items: @cart.CartQty Total amount: @cart.CartMoney.Value.ToString("#,###.##") Baht
+                </div>
+                <hr />
+                <!-- ปุ่มลบตะกร้าสินค้า -->
+                <div class="text-end">
+                    <a class="btn btn-danger" asp-controller="Cart" asp-action="Delete"
+                       asp-route-cartid="@cart.CartId" onclick="return confirm('Confirm to delete the cart')">
+                        <i class="bi-cart-x-fill"></i> Delete Shopping Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- แสดงรายการสินค้าในตะกร้า -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Product</th>
+                <th>Price per Unit</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th></th> <!-- Delete button column -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CtdVM detail in Model.Detail)
+            {
+                <tr>
+                    <td>@detail.PdId</td>
+                    <td>@detail.PdName</td>
+                    <td>@detail.CdtlPrice.Value.ToString("#,###.##")</td>
+                    <td>@detail.CdtlQty</td>
+                    <td>@detail.CdtlMoney.Value.ToString("#,###.##")</td>
+                    <!-- ปุ่มลบสินค้า -->
+                    <td>
+                        <a class="btn btn-danger" asp-controller="Cart" asp-action="DeleteDtl"
+                           asp-route-pdid="@detail.PdId" asp-route-cartid="@detail.CartId"
+                           onclick="return confirm('Confirm to delete the selected item')">
+                            <i class="bi-x-lg text-danger"></i> Delete Item
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
