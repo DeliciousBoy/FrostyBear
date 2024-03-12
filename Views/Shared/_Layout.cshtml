@@ -62,6 +62,9 @@
 
                         var CusName = @HttpContextAccessor.HttpContext.Session.GetString("CusName");
                         var CusId = @HttpContextAccessor.HttpContext.Session.GetString("CusId");
+                        <a class="btn btn-success" asp-controller="Customer" asp-action="Show" asp-route-id="@CusId">
+                            @CusName
+                        </a>
 
 
                         <a class="btn btn-danger text-white"
