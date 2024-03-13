@@ -1,75 +1,79 @@
 ﻿@using FrostyBear.ViewModels;
-@using System.Globalization;
 @model dynamic
+@using System.Globalization;
 
 @{
-    ViewData["Title"] = "Your Shopping Cart";
+	CultureInfo us = new CultureInfo("en-us");
 }
-
 <div class="container">
-    <!-- แสดงข้อความแจ้งเตือน -->
     @if (TempData["ErrorMessage"] != null)
     {
         <div class="alert alert-warning">@TempData["ErrorMessage"]</div>
     }
+
 </div>
-
-<div class="container mt-5">
-    <h1>Your Shopping Cart</h1>
-
-    <!-- แสดงรายละเอียดของตะกร้า -->
-    @foreach (Cart cart in Model.Master)
-    {
-        <div class="card bg-light mb-3">
-            <div class="card-body">
-                <h4 class="card-title text-primary opacity-75">Order Number: @cart.CartId</h4>
-                <h5 class="card-subtitle mt-2 text-muted">Order Date: @cart.CartDate.Value.ToString("yyyy-MMM-dd", CultureInfo.InvariantCulture)</h5>
-                <div class="text-danger text-end">
-                    Number of items: @cart.CartQty Total amount: @cart.CartMoney.Value.ToString("#,###.##") Baht
-                </div>
-                <hr />
-                <!-- ปุ่มลบตะกร้าสินค้า -->
-                <div class="text-end">
-                    <a class="btn btn-danger" asp-controller="Cart" asp-action="Delete"
-                       asp-route-cartid="@cart.CartId" onclick="return confirm('Confirm to delete the cart')">
-                        <i class="bi-cart-x-fill"></i> Delete Shopping Cart
-                    </a>
-                </div>
+<!--อ่านค่าจาก Model เป็น Object-->
+@foreach (Cart master in Model.Master)
+{
+    <div class="card bg-light">
+        <div class="card-body">
+            <h4 class="card-title text-primary opacity-75">คำสั่งซื้อเลขที่ @master.CartId</h4>
+            <h5 class="card-subtitle mt-2 text-muted">
+                สั่งซื้อวันที่ @master.CartDate.Value.ToString("yyyy-MMM-dd", us)
+            </h5>
+            <div class="text-danger text-end">
+                จำนวนสินค้า @master.CartQty ยอดเงิน @master.CartMoney.Value.ToString("#,###.##") บาท
             </div>
+            <hr />
+            <a class="btn btn-danger" asp-controller="Cart" asp-action="Delete"
+               asp-route-cartid="@master.CartId" onclick="return confirm('ยืนยันลบตะกร้า')">
+                <i class="bi-cart-x-fill"></i> ลบตะกร้าสินค้า
+            </a>
+            <a class="btn btn-primary" asp-controller="Cart" asp-action="Confirm"
+               asp-route-cartid="@master.CartId" onclick="return confirm('ยืนยันสั่งสินค้า')">
+                <i class="bi-currency-dollar"></i> ยืนยันสั่งสินค้า
+            </a>
         </div>
+    </div>
+}
+<table class="table table-hover mt-3 ">
+    <tr class="bg-light">
+        <td></td>
+        <td>รหัสสินค้า</td>
+        <td>ชื่อสินค้า</td>
+        <td class="text-end">ราคาต่อหน่วย</td>
+        <td class="text-center">จำนวน</td>
+        <td class="text-end">เป็นเงิน</td>
+        <td></td>
+    </tr>
+    @{
+        var i = 0;
+    }
+    @foreach (CtdVM detail in Model.Detail)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>
+                <a asp-action="Show" asp-controller="Product" asp-route-id="@detail.ProductId">
+                    @detail.ProductId
+                </a>
+            </td>
+            <td>@detail.ProductName</td>
+            <td class="text-end">@detail.CdtlPrice.Value.ToString("#,###.##")</td>
+            <td class="text-center">@detail.CdtlQty</td>
+            <td class="text-end">@detail.CdtlMoney.Value.ToString("#,###.##")</td>
+            <td class="text-center">
+                <form asp-controller="Cart" asp-action="DeleteDtl" method="post"
+                      onsubmit="return confirm('ยืนยันลบสินค้าที่เลือก')">
+                    <input type="hidden" name="pdid" value="@detail.ProductId" />
+                    <input type="hidden" name="cartid" value="@detail.CartId" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi-x-lg text-danger"></i> ยกเลิก
+                    </button>
+                </form>
+            </td>
+        </tr>
     }
 
-    <!-- แสดงรายการสินค้าในตะกร้า -->
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Product</th>
-                <th>Price per Unit</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th></th> <!-- Delete button column -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (CtdVM detail in Model.Detail)
-            {
-                <tr>
-                    <td>@detail.PdId</td>
-                    <td>@detail.PdName</td>
-                    <td>@detail.CdtlPrice.Value.ToString("#,###.##")</td>
-                    <td>@detail.CdtlQty</td>
-                    <td>@detail.CdtlMoney.Value.ToString("#,###.##")</td>
-                    <!-- ปุ่มลบสินค้า -->
-                    <td>
-                        <a class="btn btn-danger" asp-controller="Cart" asp-action="DeleteDtl"
-                           asp-route-pdid="@detail.PdId" asp-route-cartid="@detail.CartId"
-                           onclick="return confirm('Confirm to delete the selected item')">
-                            <i class="bi-x-lg text-danger"></i> Delete Item
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+</table>

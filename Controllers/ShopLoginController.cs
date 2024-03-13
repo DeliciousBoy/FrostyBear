@@ -57,7 +57,7 @@ namespace FrostyBear.Controllers
             }
 
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Check", "Cart");
         }
 
         public IActionResult Logout()

@@ -1,6 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
 
+@{
+    var CartId = HttpContextAccessor.HttpContext.Session.GetString("CartId");
+    var CartMoney = HttpContextAccessor.HttpContext.Session.GetString("CartMoney");
+    var CartQty = HttpContextAccessor.HttpContext.Session.GetString("CartQty");
+    var CusId = HttpContextAccessor.HttpContext.Session.GetString("CusId");
+    var CusName = HttpContextAccessor.HttpContext.Session.GetString("CusName");
+}
+
 <!DOCTYPE html>
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -25,7 +33,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Shop">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">About</a>
@@ -33,17 +41,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="List" asp-route-cusid="@CusId">Purchase history</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="text-end pe-3">
                     <!--แสดงข้อมูลตะกร้า-->
                     @if (@HttpContextAccessor.HttpContext.Session.GetString("CartId") != null)
                     {
-                        var CartId = HttpContextAccessor.HttpContext.Session.GetString("CartId");
-                        var CartMoney = HttpContextAccessor.HttpContext.Session.GetString("CartMoney");
-                        var CartQty = HttpContextAccessor.HttpContext.Session.GetString("CartQty");
+                        //var CartId = HttpContextAccessor.HttpContext.Session.GetString("CartId");
+                        //var CartMoney = HttpContextAccessor.HttpContext.Session.GetString("CartMoney");
+                        //var CartQty = HttpContextAccessor.HttpContext.Session.GetString("CartQty");
 
-                        <a class="btn btn-success opacity-50 text-white mx-2">
+                        <a class="btn btn-success opacity-50 text-white mx-2"
+                            asp-controller="Cart" asp-action="Show" asp-route-cartid="@CartId">
                             @CartId [@CartMoney][@CartQty]
                         </a>
                     }
@@ -60,8 +72,8 @@
                     @if (HttpContextAccessor.HttpContext.Session.GetString("CusId") != null)
                     {
 
-                        var CusName = @HttpContextAccessor.HttpContext.Session.GetString("CusName");
-                        var CusId = @HttpContextAccessor.HttpContext.Session.GetString("CusId");
+                        //var CusName = @HttpContextAccessor.HttpContext.Session.GetString("CusName");
+                        //var CusId = @HttpContextAccessor.HttpContext.Session.GetString("CusId");
                         <a class="btn btn-success" asp-controller="Customer" asp-action="Show" asp-route-id="@CusId">
                             @CusName
                         </a>

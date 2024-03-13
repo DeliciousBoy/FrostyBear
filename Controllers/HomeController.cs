@@ -55,7 +55,7 @@ namespace FrostyBear.Controllers
 					   join pt in _db.Categories on p.CategoryId equals pt.CategoryId into join_p_pt
 					   from p_pt in join_p_pt.DefaultIfEmpty()
 					   where p.ProductName.Contains(stext) ||
-						   p_pt.CategoryName.Contains(stext)
+							 p_pt.CategoryName.Contains(stext)
 					   select new PdVM
 					   {
 						   ProductId = p.ProductId,
