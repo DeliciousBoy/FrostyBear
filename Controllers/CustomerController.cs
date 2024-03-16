@@ -1,6 +1,8 @@
 ﻿using FrostyBear.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 
 namespace FrostyBear.Controllers
 {
@@ -42,6 +44,55 @@ namespace FrostyBear.Controllers
             }
             return View(obj);
         }
+        public IActionResult Edit(string id)
+        {
+            if (id == null)
+            {
+                TempData["ErrorMessage"] = "ต้องระบุ ID";
+                return RedirectToAction("Index");
+            }
+            var obj = _db.Customers.Find(id);
+            if (obj == null)
+            {
+                TempData["ErrorMessage"] = "หา ID ไม่พบ";
+                return RedirectToAction("Index");
+            }
+            var fileName = id.ToString() + ".jpg";
+            var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\imagcus");
+            var filePath = Path.Combine(imgPath, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                ViewBag.ImgFile = "/imagcus/" + id + ".jpg";
+            }
+            else
+            {
+                ViewBag.ImgFile = "/imagcus/login.jpg";
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Customer obj)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _db.Customers.Update(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Show", new { id = obj.CustomerId });
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View(obj);
+            }
+            ViewBag.ErrorMessage = "การแก้ไขผิดพลาด";
+            return View(obj);
+        }
         public IActionResult ImgUpload(IFormFile imgfiles, string theid)
         {
             var FileName = theid;
@@ -56,7 +107,7 @@ namespace FrostyBear.Controllers
                 fs.Flush();
             }
 
-            return RedirectToAction("Show", new { id = theid });
+            return RedirectToAction("Edit", new { id = theid });
         }
 
         public IActionResult ImgDelete(string id)
@@ -69,7 +120,7 @@ namespace FrostyBear.Controllers
             {
                 System.IO.File.Delete(filePath);
             }
-            return RedirectToAction("Show", new { id = id });
+            return RedirectToAction("Edit", new { id = id });
         }
     }
 }
