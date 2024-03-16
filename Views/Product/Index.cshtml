@@ -36,6 +36,7 @@
 <table width="80%" class="table">
     <tr>
         <th></th>
+        <th>รูป</th>
         <th>รหัสสินค้า</th>
         <th>ชื่อสินค้า</th>
         <th>ประเภท</th>
@@ -49,9 +50,11 @@
     }
     @foreach (var item in Model)
     {
+        var pdimg = "/images/" + item.ProductId + ".png";
         i++;
         <tr>
             <td>@i</td>
+            <td><img src="@pdimg" class="card-img-top img-fluid object-fit-cover" style="height:10vh" alt="..."></td>
             <td>@item.ProductId</td>
             <td>@item.ProductName</td>
             <td>@item.CategoryName</td>

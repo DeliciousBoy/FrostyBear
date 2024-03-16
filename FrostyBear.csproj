@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\images\p001.png" />
     <Content Remove="wwwroot\images\p002.png" />
     <Content Remove="wwwroot\images\p003.png" />
     <Content Remove="wwwroot\images\p004.png" />
@@ -67,7 +66,6 @@
     <None Include="wwwroot\images\p007.png" />
     <None Include="wwwroot\images\p008.png" />
     <None Include="wwwroot\images\p019.png" />
-    <None Include="wwwroot\images\p001.png" />
     <None Include="wwwroot\images\p018.png" />
     <None Include="wwwroot\images\p002.png" />
   </ItemGroup>

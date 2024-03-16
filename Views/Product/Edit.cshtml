@@ -20,6 +20,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
             <div class="form-group">
+                <img src="@ViewBag.imgfile" class="card-img-top img-fluid object-fit-cover" style="height:10vh" alt="...">
+                <div class="col">
+                    <a class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันลบรูป')"
+                       asp-action="ImgDelete" asp-route-id="@Model.ProductId">
+                        <i class="bi bi-x-lg"></i> ลบรูปภาพ
+                    </a>
+                </div>
+            </div>
+            <div class="form-group">
                 <label asp-for="ProductName" class="control-label"></label>
                 <input asp-for="ProductName" class="form-control" />
                 <span asp-validation-for="ProductName" class="text-danger"></span>
@@ -58,6 +67,16 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <div class="row">
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" asp-action="ImgUpload">
+                    <input name="theid" type="hidden" value="@Model.ProductId" />
+                    <input type="file" accept="image/png" name="imgfiles"
+                           class="form-control" required />
+                    <button type="submit" class="btn btn-success mt-4">Upload</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using FrostyBear.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
+using System.Threading;
+using Microsoft.AspNetCore.Http;
 namespace FrostyBear.Controllers
 {
     public class ProductController : Controller
@@ -77,7 +80,7 @@ namespace FrostyBear.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(Product obj, IFormFile? imgfiles)
         {
             var lastprod = _db.Products
                                 .OrderByDescending(p => p.ProductId)
@@ -89,9 +92,23 @@ namespace FrostyBear.Controllers
                 {
                     string newprodId = lastprod.Substring(0, 1) + (int.Parse(lastprod.Substring(1)) + 1).ToString("D3");
                     obj.ProductId = newprodId;
+                    if (imgfiles != null && imgfiles.Length > 0)
+                    {
+                        var FileName = newprodId;
+                        var FileExtension = ".png";
+                        var SaveFileName = FileName + FileExtension;
+                        var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
+                        var SaveFilePath = Path.Combine(SavePath, SaveFileName);
+
+                        using (FileStream fs = System.IO.File.Create(SaveFilePath))
+                        {
+                            imgfiles.CopyTo(fs);
+                            fs.Flush();
+                        }
+                    }
                     _db.Products.Add(obj);  
                     _db.SaveChanges(); 
-                    return RedirectToAction("Index"); 
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -118,6 +135,7 @@ namespace FrostyBear.Controllers
             }
             ViewData["Categories"] = new SelectList(_db.Categories, "CategoryId", "CategoryName", obj.ProductId);
             ViewData["Brand"] = new SelectList(_db.Brands, "BrandId", "BrandName", obj.BrandId);
+            ViewBag.imgfile = "/images/" + obj.ProductId + ".png";
             return View(obj);
         }
 
@@ -211,6 +229,34 @@ namespace FrostyBear.Controllers
                                where p.ProductId.StartsWith(PrefixPdId)
                                select p.ProductStock).FirstOrDefault();
             return Content(stockRemain.ToString());
+        }
+        public IActionResult ImgUpload(IFormFile imgfiles, string theid)
+        {
+            var FileName = theid;
+            //var FileExtension = Path.GetExtension(imgfiles.FileName);
+            var FileExtension = ".png";
+            var SaveFileName = FileName + FileExtension;
+            var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
+            var SaveFilePath = Path.Combine(SavePath, SaveFileName);
+            using (FileStream fs = System.IO.File.Create(SaveFilePath))
+            {
+                imgfiles.CopyTo(fs);
+                fs.Flush();
+            }
+
+            return RedirectToAction("Edit", new { id = theid });
+        }
+        public IActionResult ImgDelete(string id)
+        {
+            var fileName = id.ToString() + ".png";
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
+            var filePath = Path.Combine(imagePath, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+            return RedirectToAction("Edit", new { id = id });
         }
     }
 }

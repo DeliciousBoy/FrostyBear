@@ -38,7 +38,7 @@ namespace FrostyBear.Controllers
             }
             else
             {
-                ViewBag.ImgFile = "/image/login.png";
+                ViewBag.ImgFile = "/imagcus/login.jpg";
             }
             return View(obj);
         }
