@@ -80,7 +80,7 @@ namespace FrostyBear.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product obj, IFormFile? imgfiles)
+        public IActionResult Create(Product obj,IFormFile imgfiles)
         {
             var lastprod = _db.Products
                                 .OrderByDescending(p => p.ProductId)
